@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import CountryCards from "./countryCard/CountryCards";
 
 function App() {
