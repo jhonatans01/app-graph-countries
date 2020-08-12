@@ -42,7 +42,7 @@ export default class CountriesService {
               area
               population
               flag {
-                svgFile
+                emoji
               }
               topLevelDomains {
                 name

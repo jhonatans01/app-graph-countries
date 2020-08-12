@@ -1,24 +1,40 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Router, Route, Switch } from "react-router";
 import "./App.scss";
 import CountryCards from "./countryCard/CountryCards";
+import { ApolloProvider } from "@apollo/client";
+import { ApiConfigService } from "./services/apiConfigService";
+import CountryPage from "./countryPage/CountryPage";
+import BasicPageLayout from "./basicPageLayout/BasicPageLayout";
+import { createBrowserHistory } from "history";
+
+const apiClient = ApiConfigService.getInstance();
+const customHistory = createBrowserHistory();
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-          </nav>
-          <Route path="/" exact component={CountryCards} />
-        </div>
-      </Router>
-    </div>
+    <ApolloProvider client={apiClient}>
+      <div className="App">
+        <Router history={customHistory}>
+          <BasicPageLayout>
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                </ul>
+              </nav>
+              <Switch>
+                <Route path="/" exact component={CountryCards} />
+                <Route path="/country/:name" exact component={CountryPage} />
+              </Switch>
+            </div>
+          </BasicPageLayout>
+        </Router>
+      </div>
+    </ApolloProvider>
   );
 }
 
