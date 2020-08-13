@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CountriesService from "../services/countriesService";
 import { ApolloQueryResult } from "@apollo/client";
-import { Cards } from "./CountryCard.style";
 import CountryCard from "./CountryCard";
+import './countryCard.scss';
 
 const service = new CountriesService();
 const initialState = {
@@ -21,12 +21,13 @@ function CountryCards() {
       .then((result: ApolloQueryResult<any>) => setQueryResult(result));
   }, []);
 
-  return countries?.loading ? (
-    <div>loading ...</div>
-  ) : (
-    <Cards>
-      <CountryCard countries={countries} />
-    </Cards>
+  if (countries.loading) return <div>loading ...</div>;
+  if (countries.error) return <div>error</div>;
+
+  return (
+    <div className={'cards'}>
+      <CountryCard countries={countries.data.Country} />
+    </div>
   );
 }
 

@@ -3,7 +3,7 @@ import CountriesService from "../services/countriesService";
 import { ApolloQueryResult } from "@apollo/client";
 import { RouteComponentProps } from "react-router-dom";
 import { Country } from "../types/country";
-import { Flag } from "./CountryPage.style";
+import "./countryPage.scss";
 import Button from "../button/Button";
 import CountryFormModal from "../countryFormModal/CountryFormModal";
 
@@ -57,7 +57,7 @@ class CountryPage extends React.Component<RouteComponentProps, State> {
       (country && country[0] && (
         <>
           <div>
-            <Flag>{country[0].flag?.emoji}</Flag>
+            <p className={'flag'}>{country[0].flag?.emoji}</p>
             <p>{country[0].name}</p>
             <p>{country[0].capital}</p>
             <p>{country[0].area}</p>

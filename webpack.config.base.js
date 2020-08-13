@@ -15,17 +15,17 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: [/node_modules/, /stories/],
+        exclude: [/node_modules/],
         loader: "babel-loader",
       },
       {
         test: /\.tsx?$/,
         use: "ts-loader",
-        exclude: [/node_modules/, /stories/],
+        exclude: [/node_modules/],
       },
       {
         test: /\.s[ac]ss$/i,
-        exclude: [/node_modules/, /stories/],
+        exclude: [/node_modules/],
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],

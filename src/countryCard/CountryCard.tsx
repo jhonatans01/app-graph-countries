@@ -1,11 +1,11 @@
 import React from "react";
 import { Country } from "../types/country";
 import Button from "../button/Button";
-import { Card, Flag } from "./CountryCard.style";
-import { ApolloQueryResult } from "@apollo/client";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import './countryCard.scss';
+
 interface Props {
-  countries: ApolloQueryResult<any>;
+  countries: Country[];
 }
 
 class CountryCard extends React.Component<Props & RouteComponentProps, {}> {
@@ -20,20 +20,18 @@ class CountryCard extends React.Component<Props & RouteComponentProps, {}> {
 
   render() {
     return (
-      this.props.countries.data?.Country?.map(
-        (country: Country, key: number) => (
-          <Card key={key}>
-            <Flag>{country.flag?.emoji}</Flag>
-            <p>{country.name}</p>
-            <p>{country.capital}</p>
-            <Button
-              title={"Detalhes"}
-              type={"primary"}
-              onClick={() => this.goToDetailsPage(country.name)}
-            />
-          </Card>
-        )
-      ) || <></>
+      this.props.countries.map((country: Country, key: number) => (
+        <div className={'card'} key={key}>
+          <p className={'flag'}>{country.flag?.emoji}</p>
+          <p>{country.name}</p>
+          <p>{country.capital}</p>
+          <Button
+            title={"Detalhes"}
+            type={"primary"}
+            onClick={() => this.goToDetailsPage(country.name)}
+          />
+        </div>
+      )) || <></>
     );
   }
 }

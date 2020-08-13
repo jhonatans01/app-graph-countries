@@ -3,7 +3,7 @@ import CountriesService from "../services/countriesService";
 import { Country } from "../types/country";
 import { Flag } from "../countryPage/CountryPage.style";
 import Button from "../button/Button";
-import { Modal, ModalMain } from "./CountryFormModal.style";
+import {countries} from "../repositories/countryRepository";
 
 interface Props {
   readonly country: Country;
@@ -29,13 +29,13 @@ function CountryFormModal(props: Props) {
   const [values, setValues] = useState(initialValues);
 
   useEffect(() => {
-    const { name, capital, area, population, topLevelDomains } = props.country;
+    const {name, capital, area, population, topLevelDomains} = props.country;
     setValues({
       name: name,
       capital: capital,
       area: area || 0,
       population: population || 0,
-      topLevelDomains: topLevelDomains || [{ name: "" }],
+      topLevelDomains: topLevelDomains || [{name: ""}],
     });
   }, []);
 
@@ -43,25 +43,27 @@ function CountryFormModal(props: Props) {
     e.preventDefault();
     const fieldName = e.target.name;
     if (fieldName === "topLevelDomains") {
-      setValues({ ...values, [fieldName]: [{ name: e.target.value }] });
+      setValues({...values, [fieldName]: [{name: e.target.value}]});
     } else {
-      setValues({ ...values, [fieldName]: e.target.value });
+      setValues({...values, [fieldName]: e.target.value});
     }
   }
 
   function submitForm(event: FormEvent) {
+    const cartItems = countries();
+    cartItems.push(values as never);
+    console.log(cartItems);
     event.preventDefault();
-    service.save(values);
   }
 
   return props.show ? (
-    <Modal>
-      <ModalMain>
+    <section className={'modal'}>
+      <main className={'modal--content'}>
         <form onSubmit={submitForm}>
-          <Flag>{props.country.flag?.emoji}</Flag>
+          <p className={'flag'}>{props.country.flag?.emoji}</p>
           <p>
             Name:{" "}
-            <input name="name" value={values.name} onChange={onChange}></input>
+            <input name="name" value={values.name} onChange={onChange}/>
           </p>
           <p>
             Capital:{" "}
@@ -69,7 +71,7 @@ function CountryFormModal(props: Props) {
               name="capital"
               value={values.capital}
               onChange={onChange}
-            ></input>
+            />
           </p>
           <p>
             Population:{" "}
@@ -78,7 +80,7 @@ function CountryFormModal(props: Props) {
               value={values.population}
               onChange={onChange}
               type="number"
-            ></input>
+            />
           </p>
           <p>
             Area:{" "}
@@ -87,7 +89,7 @@ function CountryFormModal(props: Props) {
               value={values.area}
               onChange={onChange}
               type="number"
-            ></input>
+            />
           </p>
           <p>
             Top level domain:{" "}
@@ -95,13 +97,13 @@ function CountryFormModal(props: Props) {
               name="topLevelDomains"
               value={values.topLevelDomains[0].name}
               onChange={onChange}
-            ></input>
+            />
           </p>
-          <Button title={"Submit"} type={"primary"} />
-          <Button title={"Cancel"} type={"secondary"} onClick={props.onClose} />
+          <Button title={"Submit"} type={"primary"}/>
+          <Button title={"Cancel"} type={"secondary"} onClick={props.onClose}/>
         </form>
-      </ModalMain>
-    </Modal>
+      </main>
+    </section>
   ) : (
     <></>
   );

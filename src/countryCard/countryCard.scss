@@ -1,0 +1,25 @@
+@import "./../styles/spacing";
+@import "./../styles/colors";
+
+$shadow: 0 4px 32px 0 $lighter-grey;
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 250px;
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+  text-align: center;
+  padding: $spacing-loose;
+}
+
+.flag {
+  font-size: 80px;
+  margin: 0;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { PrimaryButton, SecondaryButton } from "./../styles/buttons.style";
+import "./button.scss";
 
 interface Props {
   title: string;
@@ -10,14 +10,10 @@ interface Props {
 function Button(props: Props) {
   const { title, type, onClick } = props;
 
-  return type === "primary" ? (
-    <PrimaryButton onClick={onClick} type="submit">
+  return (
+    <button className={`btn btn--${type}`} onClick={onClick} type="submit">
       {title}
-    </PrimaryButton>
-  ) : (
-    <SecondaryButton onClick={onClick} type="button">
-      {title}
-    </SecondaryButton>
+    </button>
   );
 }
 

@@ -1,0 +1,36 @@
+@import "./../styles/fonts";
+@import "./../styles/colors";
+@import "./../styles/spacing";
+
+.btn {
+  font-family: $font-family;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-regular;
+  padding: $spacing-extra-tight;
+  transition: all 300ms ease 0s;
+}
+
+.btn.btn--primary {
+  color: $white;
+  background: $green;
+
+  &:hover {
+    background: $light-green;
+  }
+}
+
+.btn.btn--link {
+  text-decoration: none;
+}
+
+.btn.btn--secondary {
+  background: transparent;
+  color: $white;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $white;
+    background: $light-green;
+  }
+}
