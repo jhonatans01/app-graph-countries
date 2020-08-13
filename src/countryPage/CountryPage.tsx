@@ -4,9 +4,12 @@ import { ApolloQueryResult } from "@apollo/client";
 import { RouteComponentProps } from "react-router-dom";
 import { Country } from "../types/country";
 import { Flag } from "./CountryPage.style";
+import Button from "../button/Button";
+import CountryFormModal from "../countryFormModal/CountryFormModal";
 
 interface State {
   country: ApolloQueryResult<any>;
+  showEditForm: boolean;
 }
 
 class CountryPage extends React.Component<RouteComponentProps, State> {
@@ -15,7 +18,12 @@ class CountryPage extends React.Component<RouteComponentProps, State> {
   constructor(props: RouteComponentProps) {
     super(props);
     this.service = new CountriesService();
-    this.state = { country: { loading: true, networkStatus: 1 } };
+    this.state = {
+      country: { loading: true, networkStatus: 1 },
+      showEditForm: false,
+    };
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount() {
@@ -35,21 +43,42 @@ class CountryPage extends React.Component<RouteComponentProps, State> {
     );
   }
 
+  private showModal = () => {
+    this.setState({ showEditForm: true });
+  };
+
+  private hideModal = () => {
+    this.setState({ showEditForm: false });
+  };
+
   private renderCountry() {
     const country: Country[] | undefined = this.state.country.data?.Country;
-    console.log(country);
     return (
       (country && country[0] && (
-        <div>
-          <Flag>{country[0].flag.emoji}</Flag>
-          <p>{country[0].name}</p>
-          <p>{country[0].capital}</p>
-          <p>{country[0].area}</p>
-          {country[0].population && <p>{country[0].population}</p>}
-          {country[0].topLevelDomains?.map((topLevelDomain) => (
-            <p>{topLevelDomain.name}</p>
-          ))}
-        </div>
+        <>
+          <div>
+            <Flag>{country[0].flag?.emoji}</Flag>
+            <p>{country[0].name}</p>
+            <p>{country[0].capital}</p>
+            <p>{country[0].area}</p>
+            {country[0].population && <p>{country[0].population}</p>}
+            {country[0].topLevelDomains?.map(
+              (topLevelDomain, index: number) => (
+                <p key={index}>{topLevelDomain.name}</p>
+              )
+            )}
+            <Button
+              title={"Edit country"}
+              type={"primary"}
+              onClick={this.showModal}
+            />
+          </div>
+          <CountryFormModal
+            country={country[0]}
+            show={this.state.showEditForm}
+            onClose={this.hideModal}
+          />
+        </>
       )) || <></>
     );
   }
