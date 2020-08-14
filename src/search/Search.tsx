@@ -1,6 +1,9 @@
 import React, { FormEvent } from "react";
-import searchImage from "./images/search.png";
+import searchImage from "!!file-loader!../../public/images/search.png";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import FormInput from "../formInput/FormInput";
+import Form from "../form/Form";
+import "./search.scss";
 
 interface State {
   countryName: string;
@@ -11,6 +14,7 @@ class Search extends React.Component<RouteComponentProps, State> {
     super(props);
     this.state = { countryName: "" };
     this.submitSearch = this.submitSearch.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   private submitSearch(event: FormEvent<any>) {
@@ -22,18 +26,26 @@ class Search extends React.Component<RouteComponentProps, State> {
     }
   }
 
+  private submit(values: any) {
+    if (values.countryName) {
+      this.props.history.push(`/country/${values.countryName}`);
+    }
+  }
+
   render() {
     return (
-      <form onSubmit={this.submitSearch}>
-        <input
-          type="text"
-          placeholder="Procurar por país"
-          onChange={(e: any) => this.setState({ countryName: e.target.value })}
-        ></input>
-        <button type="submit">
-          <img src={"/images/search.png"}></img>
+      <Form onSubmit={this.submit} className={"search"}>
+        <FormInput
+          type={"text"}
+          name={"countryName"}
+          placeholder={"Procurar por país"}
+          className={"search__input"}
+        />
+
+        <button className={"search__button"} type="submit">
+          <img className={"search__icon"} src={searchImage} />
         </button>
-      </form>
+      </Form>
     );
   }
 }

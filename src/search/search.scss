@@ -1,9 +1,23 @@
-import styled from "styled-components";
-import spacing from "./../styles/spacing.style";
+@import "./../styles/spacing.scss";
 
-export const Search = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-`;
+.search {
+  align-content: center;
+  display: inline-flex;
+
+  .search__input input {
+    width: 250px;
+  }
+
+  .search__button {
+    background: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .search__icon {
+    height: $spacing-loose;
+  }
+}
