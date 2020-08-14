@@ -3,6 +3,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
+import { countries } from "../repositories/countryRepository";
 
 export class ApiConfigService {
   private static instance: ApolloClient<NormalizedCacheObject> | null;

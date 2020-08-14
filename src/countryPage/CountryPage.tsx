@@ -57,7 +57,7 @@ class CountryPage extends React.Component<RouteComponentProps, State> {
       (country && country[0] && (
         <>
           <div>
-            <p className={'flag'}>{country[0].flag?.emoji}</p>
+            <p className={"flag"}>{country[0].flag?.emoji}</p>
             <p>{country[0].name}</p>
             <p>{country[0].capital}</p>
             <p>{country[0].area}</p>

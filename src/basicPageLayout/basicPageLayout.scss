@@ -1,0 +1,37 @@
+@import "./../styles/colors.scss";
+@import "./../styles/spacing.scss";
+
+$header-height: $spacing-super;
+
+.content {
+  margin-top: $spacing-super-loose;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  border-bottom: 1px solid $lighter-grey;
+  align-items: center;
+  height: $header-height;
+  background: $white;
+}
+
+.header__options {
+  list-style: none;
+  width: 100%;
+}
+
+.header__link a {
+  float: left;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 400;
+
+  &:hover {
+    color: $green;
+    cursor: pointer;
+  }
+}

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import CountriesService from "../services/countriesService";
 import { ApolloQueryResult } from "@apollo/client";
 import CountryCard from "./CountryCard";
-import './countryCard.scss';
+import Search from "../search/Search";
+import "./countryCard.scss";
 
 const service = new CountriesService();
 const initialState = {
@@ -25,9 +26,12 @@ function CountryCards() {
   if (countries.error) return <div>error</div>;
 
   return (
-    <div className={'cards'}>
-      <CountryCard countries={countries.data.Country} />
-    </div>
+    <>
+      <Search />
+      <section className={"cards"}>
+        <CountryCard countries={countries.data.Country} />
+      </section>
+    </>
   );
 }
 

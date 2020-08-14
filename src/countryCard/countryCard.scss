@@ -4,19 +4,54 @@
 $shadow: 0 4px 32px 0 $lighter-grey;
 
 .cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   gap: 20px;
+  padding: $spacing-extra-loose;
+  font-weight: 300;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: 250px;
   -webkit-box-shadow: $shadow;
   -moz-box-shadow: $shadow;
   box-shadow: $shadow;
   text-align: center;
   padding: $spacing-loose;
+  background: $white;
+  border-radius: 6px;
+  min-height: 235px;
+
+  .btn {
+    width: 100%;
+    height: $spacing-extra-loose;
+    font-weight: bold;
+    margin-top: auto;
+  }
+}
+
+.card__text {
+  margin: $spacing-tight 0;
+}
+
+.card__text--title {
+  font-weight: 500;
 }
 
 .flag {

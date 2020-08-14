@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Router, Route, Switch } from "react-router";
 import "./App.scss";
 import CountryCards from "./countryCard/CountryCards";
@@ -18,19 +17,10 @@ function App() {
       <div className="App">
         <Router history={customHistory}>
           <BasicPageLayout>
-            <div>
-              <nav>
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                </ul>
-              </nav>
-              <Switch>
-                <Route path="/" exact component={CountryCards} />
-                <Route path="/country/:name" exact component={CountryPage} />
-              </Switch>
-            </div>
+            <Switch>
+              <Route path="/" exact component={CountryCards} />
+              <Route path="/country/:name" exact component={CountryPage} />
+            </Switch>
           </BasicPageLayout>
         </Router>
       </div>
