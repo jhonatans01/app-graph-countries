@@ -1,0 +1,25 @@
+@import "./../styles/spacing";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+}
+
+.modal--content {
+  opacity: 1;
+  pointer-events: auto;
+  box-sizing: border-box;
+  -webkit-animation: showSweetAlert 0.3s;
+  animation: showSweetAlert 0.3s;
+  will-change: transform;
+}
+
+.flag {
+  font-size: 80px;
+  margin: 0;
+}
