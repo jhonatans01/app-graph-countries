@@ -1,23 +1,38 @@
-import React, { useState, FormEvent, useEffect, ChangeEvent } from "react";
-import CountriesService from "../services/countriesService";
+import React, { useState, useEffect } from "react";
 import { Country } from "../types/country";
 import "./countryFormModal.scss";
 import Button from "../button/Button";
-import { countries } from "../repositories/countryRepository";
 import Form from "../form/Form";
 import FormInput from "../formInput/FormInput";
+import { gql, useMutation } from "@apollo/client";
 
 interface Props {
   readonly country: Country;
   readonly show: boolean;
-  readonly onClose: () => void;
+  readonly onClose: (newValues?: any) => void;
 }
+
+const updateCountryQuery = gql`
+  mutation UpdateCountry(
+    $name: String
+    $capital: String!
+    $alpha2Code: String!
+  ) {
+    updateCountry(name: $name, capital: $capital, alpha2Code: $alpha2Code)
+      @client {
+      name
+      capital
+      alpha2Code
+    }
+  }
+`;
 
 const initialValues = {
   name: "",
   capital: "",
   population: 0,
   area: 0,
+  alpha2Code: "",
   topLevelDomains: [
     {
       name: "",
@@ -25,28 +40,50 @@ const initialValues = {
   ],
 };
 
-const service = new CountriesService();
-
 function CountryFormModal(props: Props) {
   const [values, setValues] = useState(initialValues);
+  const [updateCountry, { data }] = useMutation(updateCountryQuery);
 
   useEffect(() => {
-    const { name, capital, area, population, topLevelDomains } = props.country;
+    const {
+      name,
+      capital,
+      area,
+      population,
+      topLevelDomains,
+      alpha2Code,
+    } = props.country;
     setValues({
       name: name,
       capital: capital,
+      alpha2Code: alpha2Code || "",
       area: area || 0,
       population: population || 0,
       topLevelDomains: topLevelDomains || [{ name: "" }],
     });
   }, []);
 
-  function submitForm(values: any) {
-    if (values.topLevelDomains) {
-      values.topLevelDomains = [{ name: values.topLevelDomains }];
+  function submitForm(valuesFromForm: any) {
+    if (valuesFromForm.topLevelDomains) {
+      valuesFromForm.topLevelDomains = [
+        { name: valuesFromForm.topLevelDomains },
+      ];
     }
-    console.log(values);
-    props.onClose();
+
+    const { name, capital, population, area, topLevelDomains } = valuesFromForm;
+
+    updateCountry({
+      variables: {
+        name,
+        capital,
+        alpha2Code: values.alpha2Code,
+        population,
+        area,
+        topLevelDomains,
+      },
+    });
+
+    props.onClose(valuesFromForm);
   }
 
   return props.show ? (

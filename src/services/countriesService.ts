@@ -21,25 +21,8 @@ export default class CountriesService {
             Country {
               name
               capital
-              flag {
-                emoji
-              }
-            }
-          }
-        `,
-      })
-      .then((result: ApolloQueryResult<any>) => result);
-  }
-
-  public get(countryName: string) {
-    return this.apiConfigService
-      .query({
-        query: gql`
-          query {
-            Country(name: "${countryName}") {
-              name
-              capital
               area
+              alpha2Code
               population
               flag {
                 emoji

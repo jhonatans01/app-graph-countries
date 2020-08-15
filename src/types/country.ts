@@ -1,6 +1,7 @@
 export interface Country {
   name: string;
   capital: string;
+  alpha2Code?: string;
   flag?: {
     emoji: any;
   };
