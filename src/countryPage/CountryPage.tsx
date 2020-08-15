@@ -9,19 +9,7 @@ import Card from "../card/Card";
 
 const query = gql`
   query GetCountry($name: String!) {
-    Country(name: $name) @client {
-      name
-      capital
-      area
-      alpha2Code
-      population
-      flag {
-        emoji
-      }
-      topLevelDomains {
-        name
-      }
-    }
+    Country(name: $name) @client
   }
 `;
 
@@ -39,6 +27,9 @@ function CountryPage(props: RouteComponentProps) {
 
   function hideModal(newValues?: any) {
     setShowEditForm(false);
+    if (newValues.name) {
+      props.history.push(`/country/${newValues.name}`);
+    }
   }
 
   function renderCountry() {

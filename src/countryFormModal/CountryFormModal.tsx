@@ -17,12 +17,26 @@ const updateCountryQuery = gql`
     $name: String
     $capital: String!
     $alpha2Code: String!
+    $population: Int!
+    $area: Int!
+    $flag: Flag!
+    $topLevelDomains: [TopLevelDomain]!
   ) {
-    updateCountry(name: $name, capital: $capital, alpha2Code: $alpha2Code)
-      @client {
+    updateCountry(
+      name: $name
+      capital: $capital
+      alpha2Code: $alpha2Code
+      area: $area
+      flag: $flag
+      population: $population
+      topLevelDomains: $topLevelDomains
+    ) @client {
       name
       capital
       alpha2Code
+      area
+      flag
+      topLevelDomains
     }
   }
 `;
@@ -32,7 +46,6 @@ const initialValues = {
   capital: "",
   population: 0,
   area: 0,
-  alpha2Code: "",
   topLevelDomains: [
     {
       name: "",
@@ -42,26 +55,18 @@ const initialValues = {
 
 function CountryFormModal(props: Props) {
   const [values, setValues] = useState(initialValues);
-  const [updateCountry, { data }] = useMutation(updateCountryQuery);
+  const [updateCountry] = useMutation(updateCountryQuery);
 
   useEffect(() => {
-    const {
-      name,
-      capital,
-      area,
-      population,
-      topLevelDomains,
-      alpha2Code,
-    } = props.country;
+    const { name, capital, area, population, topLevelDomains } = props.country;
     setValues({
       name: name,
       capital: capital,
-      alpha2Code: alpha2Code || "",
       area: area || 0,
       population: population || 0,
       topLevelDomains: topLevelDomains || [{ name: "" }],
     });
-  }, []);
+  }, [props.country]);
 
   function submitForm(valuesFromForm: any) {
     if (valuesFromForm.topLevelDomains) {
@@ -76,8 +81,9 @@ function CountryFormModal(props: Props) {
       variables: {
         name,
         capital,
-        alpha2Code: values.alpha2Code,
+        alpha2Code: props.country.alpha2Code,
         population,
+        flag: props.country.flag,
         area,
         topLevelDomains,
       },

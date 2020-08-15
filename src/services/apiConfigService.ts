@@ -3,7 +3,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
-import { countriesVar } from "../repositories/cache";
+import { countriesVar, typeDefs } from "../repositories/cache";
 import { Country } from "../types/country";
 
 export class ApiConfigService {
@@ -53,20 +53,43 @@ export class ApiConfigService {
         },
       },
       cache: this.cache,
+      typeDefs: typeDefs,
       resolvers: {
         Mutation: {
           updateCountry: (
             _,
-            { name, capital, area, population, topLevelDomains, alpha2Code },
+            {
+              name,
+              capital,
+              area,
+              population,
+              topLevelDomains,
+              flag,
+              alpha2Code,
+            },
             { cache }
           ) => {
-            const previousValues = countriesVar().find(
+            let allValues = countriesVar();
+            let previousValues = allValues.find(
               (value: Country) => value.alpha2Code === alpha2Code
             );
 
             if (previousValues) {
-              previousValues.name = name;
-              previousValues.capital = capital;
+              const newValues = {
+                name: name,
+                capital: capital,
+                area: area,
+                population: population,
+                flag: flag,
+                topLevelDomains: topLevelDomains,
+                alpha2Code: alpha2Code,
+              } as Country;
+
+              allValues = allValues.map((country: Country) =>
+                country.alpha2Code === alpha2Code ? newValues : country
+              );
+
+              countriesVar(allValues);
             }
 
             return null;

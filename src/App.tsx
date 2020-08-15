@@ -17,7 +17,6 @@ const service = new CountriesService();
 function App() {
   useEffect(() => {
     service.getAll().then((result: ApolloQueryResult<any>) => {
-      result.data.Country[0].name = "aaa";
       countriesVar(result.data.Country);
     });
   }, []);
