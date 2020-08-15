@@ -3,10 +3,29 @@
 
 $color-focus: $green;
 
+.form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input__label {
+  text-align: left;
+}
+
 .form-input input {
   margin: $spacing-tight 0;
   padding: $spacing-tight;
   background: $lighter-grey;
+}
+
+.form-input input::-webkit-outer-spin-button,
+.form-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-input input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .form-input input {

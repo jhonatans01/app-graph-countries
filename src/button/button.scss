@@ -4,7 +4,6 @@
 
 .btn {
   font-family: $font-family;
-  border: none;
   cursor: pointer;
   font-size: $font-size-regular;
   padding: $spacing-extra-tight;
@@ -14,23 +13,21 @@
 .btn.btn--primary {
   color: $white;
   background: $green;
+  border: none;
 
   &:hover {
     background: $light-green;
   }
 }
 
-.btn.btn--link {
-  text-decoration: none;
-}
-
 .btn.btn--secondary {
+  color: $green;
   background: transparent;
-  color: $white;
-  text-transform: uppercase;
+  border: 1px solid $green;
 
   &:hover {
     color: $white;
     background: $light-green;
+    border-color: transparent;
   }
 }

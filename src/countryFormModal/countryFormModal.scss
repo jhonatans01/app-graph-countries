@@ -1,11 +1,39 @@
 @import "./../styles/spacing";
+@import "./../styles/colors";
+
+$background-color: rgba(0, 0, 0, 0.6);
 
 .modal {
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  background-color: $background-color;
+  pointer-events: none;
+  opacity: 1;
 }
 
-.modal--content {
+.modal__content {
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+  padding: $spacing-loose;
+  position: absolute;
+  left: calc(50% - 200px);
+  top: 12%;
+  border-radius: $spacing-extra-tight;
+  pointer-events: auto;
+  cursor: auto;
+  box-shadow: 0 $spacing-extra-tight $spacing-tight $background-color;
+}
 
+.modal__buttons {
+  width: 100%;
+  display: inline-flex;
+  gap: 15%;
+  margin-top: $spacing-loose;
 }
 
 .flag {

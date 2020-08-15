@@ -32,14 +32,13 @@ export default function FormInput(props: Props) {
   }
 
   return (
-    <div className={`form-input ${className && className}`}>
+    <div className={`form-input ${className ? className : ""}`}>
       {label && (
-        <label htmlFor={name} className={className}>
+        <label className={"form-input__label"} htmlFor={name}>
           {label}
         </label>
       )}
       <input
-        className={""}
         name={name}
         value={value}
         onChange={onChange}

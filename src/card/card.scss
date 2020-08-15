@@ -1,0 +1,53 @@
+@import "./../styles/spacing";
+@import "./../styles/colors";
+
+$shadow: 0 $spacing-extra-tight $spacing-extra-loose 0 $lighter-grey;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+  text-align: center;
+  padding: $spacing-loose;
+  background: $white;
+  border-radius: 6px;
+  min-height: 235px;
+
+  .btn {
+    width: 100%;
+    height: $spacing-extra-loose;
+    font-weight: bold;
+    margin-top: auto;
+  }
+}
+
+.card__row {
+  display: inline-flex;
+  flex-direction: row;
+  margin: $spacing-tight 0;
+  text-align: justify;
+
+  :first-child {
+    font-weight: 600;
+    width: 43%;
+  }
+
+  :last-child {
+    width: 57%;
+  }
+
+  &:last-of-type {
+    margin-bottom: $spacing-extra-loose;
+  }
+}
+
+.card__text {
+  margin: $spacing-tight 0;
+}
+
+.card__text--title {
+  font-weight: 500;
+}
