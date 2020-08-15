@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CountriesService from "../services/countriesService";
 import { ApolloQueryResult } from "@apollo/client";
 import { RouteComponentProps } from "react-router-dom";
@@ -8,56 +8,36 @@ import Button from "../button/Button";
 import CountryFormModal from "../countryFormModal/CountryFormModal";
 import Card from "../card/Card";
 
-interface State {
-  country: ApolloQueryResult<any>;
-  showEditForm: boolean;
-}
+function CountryPage(props: RouteComponentProps) {
+  const service = new CountriesService();
+  const [state, setState] = useState({
+    country: { loading: true, networkStatus: 1 } as ApolloQueryResult<any>,
+    showEditForm: false,
+    error: undefined,
+  });
 
-class CountryPage extends React.Component<RouteComponentProps, State> {
-  private readonly service: CountriesService;
-
-  constructor(props: RouteComponentProps) {
-    super(props);
-    this.service = new CountriesService();
-    this.state = {
-      country: { loading: true, networkStatus: 1 },
-      showEditForm: false,
-    };
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
-  }
-
-  componentDidMount() {
-    const params = this.props.match.params as any;
-    this.service
+  useEffect(() => {
+    const params = props.match.params as any;
+    service
       .get(params.name || "")
       .then((result: ApolloQueryResult<any>) =>
-        this.setState({ country: result })
+        setState({ ...state, country: result })
       );
+  }, []);
+
+  function showModal() {
+    setState({ ...state, showEditForm: true });
   }
 
-  render() {
-    const { country } = this.state;
-
-    if (country.loading) return <div>loading ...</div>;
-    if (country.error) return <div>error</div>;
-
-    return this.renderCountry();
+  function hideModal() {
+    setState({ ...state, showEditForm: false });
   }
 
-  private showModal = () => {
-    this.setState({ showEditForm: true });
-  };
-
-  private hideModal = () => {
-    this.setState({ showEditForm: false });
-  };
-
-  private renderCountry() {
-    const country: Country[] | undefined = this.state.country.data.Country;
+  function renderCountry() {
+    const country: Country[] | undefined = state.country.data.Country;
     return (
       (country && country[0] && (
-        <Card>
+        <Card className={"country-page__card"}>
           <p className={"flag"}>{country[0].flag?.emoji}</p>
           <div className={"card__row"}>
             <span>País</span>
@@ -86,20 +66,23 @@ class CountryPage extends React.Component<RouteComponentProps, State> {
             </span>
           </div>
 
-          <Button
-            title={"Editar país"}
-            type={"primary"}
-            onClick={this.showModal}
-          />
+          <Button title={"Editar país"} type={"primary"} onClick={showModal} />
           <CountryFormModal
             country={country[0]}
-            show={this.state.showEditForm}
-            onClose={this.hideModal}
+            show={state.showEditForm}
+            onClose={hideModal}
           />
         </Card>
       )) || <>country not found</>
     );
   }
+
+  const { country } = state;
+
+  if (country.loading) return <div>loading ...</div>;
+  if (country.error) return <div>error</div>;
+
+  return renderCountry();
 }
 
 export default CountryPage;

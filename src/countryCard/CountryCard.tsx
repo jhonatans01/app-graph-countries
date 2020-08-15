@@ -3,37 +3,35 @@ import { Country } from "../types/country";
 import Button from "../button/Button";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import "./countryCard.scss";
+import Card from "../card/Card";
 
 interface Props {
   countries: Country[];
 }
 
-class CountryCard extends React.Component<Props & RouteComponentProps, {}> {
-  constructor(props: Props & RouteComponentProps) {
-    super(props);
-    this.goToDetailsPage = this.goToDetailsPage.bind(this);
+function CountryCard(props: Props & RouteComponentProps) {
+  function goToDetailsPage(countryName: string) {
+    props.history.push(`/country/${countryName}`);
   }
 
-  private goToDetailsPage(countryName: string) {
-    this.props.history.push(`/country/${countryName}`);
-  }
-
-  render() {
-    return (
-      this.props.countries.map((country: Country, key: number) => (
-        <div className={"card"} key={key}>
-          <p className={"flag"}>{country.flag?.emoji}</p>
-          <p className={"card__text--title"}>{country.name}</p>
-          <p className={"card__text"}>{country.capital}</p>
-          <Button
-            title={"Detalhes"}
-            type={"primary"}
-            onClick={() => this.goToDetailsPage(country.name)}
-          />
-        </div>
-      )) || <></>
-    );
-  }
+  return (
+    (
+      <>
+        {props.countries.map((country: Country, key: number) => (
+          <Card className={"country-card__card"} key={key}>
+            <p className={"flag"}>{country.flag?.emoji}</p>
+            <p className={"card__text--title"}>{country.name}</p>
+            <p className={"card__text"}>{country.capital}</p>
+            <Button
+              title={"Detalhes"}
+              type={"primary"}
+              onClick={() => goToDetailsPage(country.name)}
+            />
+          </Card>
+        ))}
+      </>
+    ) || <></>
+  );
 }
 
 export default withRouter(CountryCard);

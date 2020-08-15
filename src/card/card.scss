@@ -6,7 +6,6 @@ $shadow: 0 $spacing-extra-tight $spacing-extra-loose 0 $lighter-grey;
 .card {
   display: flex;
   flex-direction: column;
-  width: 250px;
   -webkit-box-shadow: $shadow;
   -moz-box-shadow: $shadow;
   box-shadow: $shadow;

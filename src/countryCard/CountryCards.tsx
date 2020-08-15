@@ -4,6 +4,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import CountryCard from "./CountryCard";
 import Search from "../search/Search";
 import "./countryCard.scss";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 const service = new CountriesService();
 const initialState = {
@@ -11,7 +12,7 @@ const initialState = {
   networkStatus: 1,
 };
 
-function CountryCards() {
+function CountryCards(props: RouteComponentProps) {
   const [countries, setQueryResult] = useState<ApolloQueryResult<any>>(
     initialState
   );
@@ -29,10 +30,10 @@ function CountryCards() {
     <>
       <Search />
       <section className={"cards"}>
-        <CountryCard countries={countries.data.Country} />
+        <CountryCard countries={countries.data.Country} {...props} />
       </section>
     </>
   );
 }
 
-export default CountryCards;
+export default withRouter(CountryCards);
