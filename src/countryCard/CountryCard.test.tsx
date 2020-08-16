@@ -1,24 +1,13 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { Country } from "../types/country";
 import CountryCard from "./CountryCard";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { within } from "@testing-library/dom";
+import {countries} from "../testUtils/countriesFixtues";
 
 describe("CountryCard tests", () => {
-  const countries: Country[] = [
-    {
-      name: "brazil",
-      flag: { emoji: "emoji" },
-      capital: "brasilia",
-    },
-    {
-      name: "argentina",
-      flag: { emoji: "emoji" },
-      capital: "buenos aires",
-    },
-  ];
+
 
   let history: any;
 

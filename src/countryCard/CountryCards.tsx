@@ -11,10 +11,14 @@ const query = gql`
   }
 `;
 
+function isInitialValue(data: any) {
+  return data.Country && data.Country[0] && data.Country[0].name === undefined;
+}
+
 function CountryCards(props: RouteComponentProps) {
   const { loading, data, error } = useQuery(query);
 
-  if (loading) return <div>loading ...</div>;
+  if (loading || isInitialValue(data)) return <div>loading ...</div>;
   if (error) return <div>error</div>;
 
   return (
