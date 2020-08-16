@@ -21,7 +21,11 @@ function Search(props: RouteComponentProps) {
       />
 
       <button className={"search__button"} type="submit">
-        <img className={"search__icon"} src={"!!file-loader!../../public/images/search.png"}  alt={'pesquisar país'}/>
+        <img
+          className={"search__icon"}
+          src={require("./../../public/images/search.png")}
+          alt={"pesquisar país"}
+        />
       </button>
     </Form>
   );

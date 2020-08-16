@@ -30,7 +30,13 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: "file-loader?name=/public/images/[name].[ext]",
+        loader: "url-loader",
+        options: {
+          limit: 8192,
+          name: '[name].[ext]',
+          publicPath: 'images/',
+          esModule: false
+        },
       },
     ],
   },

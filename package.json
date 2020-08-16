@@ -19,12 +19,14 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "~3.7.2",
+    "url-loader": "^4.1.0",
     "webpack-merge": "^5.1.1"
   },
   "scripts": {
     "start": "node server.js",
     "start:dev": "webpack-dev-server --env.NODE_ENV=dev --env.dev",
     "build": "webpack -p --env.NODE_ENV=prod --env.prod",
+    "posttest": "sed -i '' 's/\"noEmit\": true/\"noEmit\": false/g' tsconfig.json",
     "test": "react-scripts test --watchAll=false",
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject"
