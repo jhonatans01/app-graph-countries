@@ -1,5 +1,4 @@
 import React from "react";
-import searchImage from "!!file-loader!../../public/images/search.png";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import FormInput from "../formInput/FormInput";
 import Form from "../form/Form";
@@ -22,7 +21,7 @@ function Search(props: RouteComponentProps) {
       />
 
       <button className={"search__button"} type="submit">
-        <img className={"search__icon"} src={searchImage} />
+        <img className={"search__icon"} src={"!!file-loader!../../public/images/search.png"}  alt={'pesquisar país'}/>
       </button>
     </Form>
   );

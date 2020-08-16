@@ -3,7 +3,7 @@ import "./formInput.scss";
 
 interface Props {
   readonly placeholder?: string;
-  readonly type: "text" | "number" | "search";
+  readonly type: "text" | "number";
   readonly name: string;
   readonly label?: string;
   readonly className?: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 function inititalValue(
-  type: "text" | "number" | "search",
+  type: "text" | "number",
   initialValue?: string | number
 ) {
   if (initialValue) {
@@ -19,7 +19,6 @@ function inititalValue(
   }
   if (type === "text") return "";
   if (type === "number") return 0;
-  if (type === "search") return "";
 }
 
 export default function FormInput(props: Props) {
