@@ -78,8 +78,8 @@ export class ApiConfigService {
               const newValues = {
                 name: name,
                 capital: capital,
-                area: area,
-                population: population,
+                area: area && Number.parseInt(area),
+                population: population && Number.parseInt(population),
                 flag: flag,
                 topLevelDomains: topLevelDomains,
                 alpha2Code: alpha2Code,
