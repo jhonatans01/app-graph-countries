@@ -8,6 +8,7 @@ interface Props {
   readonly label?: string;
   readonly className?: string;
   readonly initialValue?: string | number;
+  readonly required?: boolean;
 }
 
 function inititalValue(
@@ -21,8 +22,24 @@ function inititalValue(
   if (type === "number") return 0;
 }
 
+function onBlur(event: React.FocusEvent<HTMLInputElement>) {
+  event.preventDefault();
+  const target = event.target;
+  if (target && target.required) {
+    target.className = !target.value ? "form-input--warning" : "";
+  }
+}
+
 export default function FormInput(props: Props) {
-  const { name, label, className, type, placeholder, initialValue } = props;
+  const {
+    name,
+    label,
+    className,
+    type,
+    placeholder,
+    initialValue,
+    required,
+  } = props;
   const [value, setValue] = useState(inititalValue(type, initialValue));
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
@@ -41,8 +58,10 @@ export default function FormInput(props: Props) {
         name={name}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
         type={type}
         placeholder={placeholder}
+        required={required}
       />
     </div>
   );

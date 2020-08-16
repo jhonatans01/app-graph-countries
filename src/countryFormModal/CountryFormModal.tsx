@@ -103,6 +103,7 @@ function CountryFormModal(props: Props) {
             name={"name"}
             label={"País"}
             initialValue={values.name}
+            required={true}
           />
           <FormInput
             type={"text"}

@@ -73,4 +73,50 @@ describe("FormInput tests", () => {
     expect(label[0].textContent).toEqual("label test");
     expect(label[0].className).toEqual("form-input__label");
   });
+
+  it("should set warning className when input is required and is empty", () => {
+    const { getByPlaceholderText } = render(
+      <FormInput
+        name={"name"}
+        type={"text"}
+        placeholder={"test"}
+        required={true}
+      />
+    );
+
+    const inputElement = getByPlaceholderText("test");
+    fireEvent.input(inputElement, { target: { value: "" } });
+    fireEvent.blur(inputElement, {});
+
+    expect(inputElement.className).toEqual("form-input--warning");
+  });
+
+  it("should not set warning className when input is required and is not empty", () => {
+    const { getByPlaceholderText } = render(
+      <FormInput
+        name={"name"}
+        type={"text"}
+        placeholder={"test"}
+        required={true}
+      />
+    );
+
+    const inputElement = getByPlaceholderText("test");
+    fireEvent.input(inputElement, { target: { value: "input test" } });
+    fireEvent.blur(inputElement, {});
+
+    expect(inputElement.className).toEqual("");
+  });
+
+  it("should not set warning className when input is not required and is empty", () => {
+    const { getByPlaceholderText } = render(
+      <FormInput name={"name"} type={"text"} placeholder={"test"} />
+    );
+
+    const inputElement = getByPlaceholderText("test");
+    fireEvent.input(inputElement, { target: { value: "" } });
+    fireEvent.blur(inputElement, {});
+
+    expect(inputElement.className).toEqual("");
+  });
 });
