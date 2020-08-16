@@ -11,7 +11,11 @@ function Button(props: Props) {
   const { title, type, onClick } = props;
 
   return (
-    <button className={`btn btn--${type}`} onClick={onClick} type="submit">
+    <button
+      className={`btn btn--${type}`}
+      onClick={onClick}
+      type={props.type === "primary" ? "submit" : "button"}
+    >
       {title}
     </button>
   );

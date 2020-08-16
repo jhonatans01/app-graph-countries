@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   ApolloQueryResult,
 } from "@apollo/client";
+import { countriesVar } from "../repositories/cache";
 
 export default class CountriesService {
   private readonly apiConfigService: ApolloClient<NormalizedCacheObject>;
@@ -35,5 +36,9 @@ export default class CountriesService {
         `,
       })
       .then((result: ApolloQueryResult<any>) => result);
+  }
+
+  public setValuesToVar(result: ApolloQueryResult<any>) {
+    countriesVar(result.data.Country);
   }
 }

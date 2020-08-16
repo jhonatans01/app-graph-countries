@@ -93,7 +93,7 @@ function CountryFormModal(props: Props) {
   }
 
   return props.show ? (
-    <div className={"modal"}>
+    <div className={"modal"} data-testid={"country-form-test-id"}>
       <div className={"modal__content"}>
         <Form onSubmit={submitForm}>
           <p className={"flag"}>{props.country.flag?.emoji}</p>

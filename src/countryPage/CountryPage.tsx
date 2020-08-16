@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Country } from "../types/country";
 import "./countryPage.scss";
 import Button from "../button/Button";
@@ -76,10 +76,11 @@ function CountryPage(props: RouteComponentProps) {
     );
   }
 
-  if (loading || !data) return <div>loading ...</div>;
+  if (loading) return <div>loading ...</div>;
   if (error) return <div>error</div>;
+  if (!data) return <div>country not found</div>;
 
   return renderCountry();
 }
 
-export default CountryPage;
+export default withRouter(CountryPage);
