@@ -6,7 +6,7 @@ import { mockedCache } from "../testUtils/cacheMock";
 import { within } from "@testing-library/dom";
 import CountryPage from "./CountryPage";
 import { countriesVarMock } from "../testUtils/countryVarMock";
-import { countriesWithDetails } from "../testUtils/countriesFixtues";
+import { countriesWithDetails } from "../testUtils/countriesFixtures";
 import { act } from "react-dom/test-utils";
 
 describe("CountryPage tests", () => {

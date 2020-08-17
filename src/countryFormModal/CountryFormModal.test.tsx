@@ -5,7 +5,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { mockedCache } from "../testUtils/cacheMock";
 import { countriesVarMock } from "../testUtils/countryVarMock";
 import CountryFormModal from "./CountryFormModal";
-import { countries, countriesWithDetails } from "../testUtils/countriesFixtues";
+import { countries, countriesWithDetails } from "../testUtils/countriesFixtures";
 import { resolversMock } from "../testUtils/resolversMock";
 import { act } from "react-dom/test-utils";
 

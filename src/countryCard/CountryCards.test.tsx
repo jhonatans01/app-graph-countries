@@ -6,7 +6,7 @@ import CountryCards from "./CountryCards";
 import { MockedProvider } from "@apollo/client/testing";
 import { mockedCache } from "../testUtils/cacheMock";
 import { within } from "@testing-library/dom";
-import { countries } from "../testUtils/countriesFixtues";
+import { countries } from "../testUtils/countriesFixtures";
 import { countriesVarMock } from "../testUtils/countryVarMock";
 
 describe("CountryCards tests", () => {

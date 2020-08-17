@@ -27,6 +27,7 @@
     "start:dev": "webpack-dev-server --env.NODE_ENV=dev --env.dev",
     "build": "webpack -p --env.NODE_ENV=prod --env.prod",
     "posttest": "sed -i '' 's/\"noEmit\": true/\"noEmit\": false/g' tsconfig.json",
+    "posttest:watch": "sed -i '' 's/\"noEmit\": true/\"noEmit\": false/g' tsconfig.json",
     "test": "react-scripts test --watchAll=false",
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject"

@@ -4,7 +4,7 @@ import CountryCard from "./CountryCard";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { within } from "@testing-library/dom";
-import {countries} from "../testUtils/countriesFixtues";
+import {countries} from "../testUtils/countriesFixtures";
 
 describe("CountryCard tests", () => {
 

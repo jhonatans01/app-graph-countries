@@ -13,11 +13,6 @@ export const mockedCache = new InMemoryCache({
               return allCountries.find(
                 (country: Country) => variables.name === country.name
               );
-            } else if (variables && variables.alpha2Code) {
-              return allCountries.find(
-                (country: Country) =>
-                  variables.alpha2Code === country.alpha2Code
-              );
             }
             return countriesVarMock();
           },

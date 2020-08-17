@@ -4,7 +4,7 @@ import App from "./App";
 import { ApolloClient, ApolloQueryResult } from "@apollo/client";
 import { mockedCache } from "./testUtils/cacheMock";
 import CountriesService from "./services/countriesService";
-import { countriesWithDetails } from "./testUtils/countriesFixtues";
+import { countriesWithDetails } from "./testUtils/countriesFixtures";
 import { countriesVarMock } from "./testUtils/countryVarMock";
 
 describe("App tests", () => {
